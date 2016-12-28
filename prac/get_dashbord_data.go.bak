@@ -1,0 +1,20 @@
+package main
+// nohup go run get_dashbord_data.go &
+import (
+    "fmt"
+    "github.com/robfig/cron"
+    "time"
+    "os/exec"
+)
+func main() {
+    fmt.Println(time.Now().String())
+    fmt.Println("Task get_dashbord_data Start.")
+    c := cron.New()
+    // @daily (or @midnight)
+    c.AddFunc("0 0 0 * * *", func() { exec.Command("curl", "https://rubydash.paas.hitachi-solutions.com/api/batchs").Start() })
+    c.Start()
+    for {
+      time.Sleep(10000000000000)
+      fmt.Println("sleep")
+    }
+}

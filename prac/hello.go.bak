@@ -1,0 +1,25 @@
+package main
+
+import (
+    "fmt"
+    "github.com/robfig/cron"
+    "time"
+    "os/exec"
+)
+
+func main() {
+    fmt.Println("hello world")
+    c := cron.New()
+//    c.AddFunc("0 */1 * * * *", func() { fmt.Println("1 minues!") })
+
+    fmt.Println(time.Now().String())
+//    c.AddFunc("@every 10m", func() { fmt.Println("10 minutes ! " + time.Now().String()) })
+    c.AddFunc("@every 5m", func() { exec.Command("/home/vcap/app/bin/get_cf_info_user.sh", "") })
+    c.Start()
+
+    for {
+      time.Sleep(10000000000000)
+      fmt.Println("sleep")
+    }
+}
+

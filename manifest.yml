@@ -1,0 +1,13 @@
+---
+applications:
+- name: gotty
+  memory: 256M
+#  command: cp /home/vcap/.bashrc /home/vcap/app && gotty -w bash
+  command: /home/vcap/app/startup.sh
+  buildpack: https://github.com/cloudfoundry/go-buildpack.git
+  env:
+    TERM: xterm-256color
+    GOTTY_CONFIG: "/home/vcap/app/.gotty"
+    GOROOT: "/home/vcap/app/bin/go"
+    GOPATH: "/home/vcap/app/wk"
+
